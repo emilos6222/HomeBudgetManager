@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Project_HomeBudget" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Project_HomeBudget" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Project_HomeBudget" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="AdditionalMethods.cpp" />
+		<Unit filename="AdditionalMethods.h" />
+		<Unit filename="BudgetManager.cpp" />
+		<Unit filename="BudgetManager.h" />
+		<Unit filename="Expense.cpp" />
+		<Unit filename="Expense.h" />
+		<Unit filename="FileWithExpenses.cpp" />
+		<Unit filename="FileWithExpenses.h" />
+		<Unit filename="FileWithIncomes.cpp" />
+		<Unit filename="FileWithIncomes.h" />
+		<Unit filename="FileWithUser.cpp" />
+		<Unit filename="FileWithUser.h" />
+		<Unit filename="HomeBudget.cpp" />
+		<Unit filename="HomeBudget.h" />
+		<Unit filename="Income.cpp" />
+		<Unit filename="Income.h" />
+		<Unit filename="Markup.cpp" />
+		<Unit filename="Markup.h" />
+		<Unit filename="User.cpp" />
+		<Unit filename="User.h" />
+		<Unit filename="UserManager.cpp" />
+		<Unit filename="UserManager.h" />
+		<Unit filename="XmlFile.cpp" />
+		<Unit filename="XmlFile.h" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
