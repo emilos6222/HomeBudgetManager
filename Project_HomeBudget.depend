@@ -1,0 +1,118 @@
+# depslib dependency file v1.0
+1661495423 source:e:\git_repozytoria\project_homebudget\budgetmanager.cpp
+	"BudgetManager.h"
+
+1659942067 source:e:\git_repozytoria\project_homebudget\expense.cpp
+	"Expense.h"
+
+1661411180 source:e:\git_repozytoria\project_homebudget\filewithexpenses.cpp
+	"FileWithExpenses.h"
+
+1661411132 source:e:\git_repozytoria\project_homebudget\filewithincomes.cpp
+	"FileWithIncomes.h"
+
+1660989615 source:e:\git_repozytoria\project_homebudget\filewithuser.cpp
+	"FileWithUser.h"
+
+1661411663 source:e:\git_repozytoria\project_homebudget\homebudget.cpp
+	"HomeBudget.h"
+
+1659942077 source:e:\git_repozytoria\project_homebudget\income.cpp
+	"Income.h"
+
+1660988511 source:e:\git_repozytoria\project_homebudget\main.cpp
+	<iostream>
+	"HomeBudget.h"
+
+1660990387 source:e:\git_repozytoria\project_homebudget\usermanager.cpp
+	"UserManager.h"
+
+1661144981 source:e:\git_repozytoria\project_homebudget\xmlfile.cpp
+	"XmlFile.h"
+
+1659422601 source:e:\git_repozytoria\project_homebudget\user.cpp
+	"User.h"
+
+1659422864 e:\git_repozytoria\project_homebudget\user.h
+	<iostream>
+	<string>
+
+1659940713 e:\git_repozytoria\project_homebudget\income.h
+	<iostream>
+	<string>
+
+1659940713 e:\git_repozytoria\project_homebudget\expense.h
+	<iostream>
+	<string>
+
+1661495536 e:\git_repozytoria\project_homebudget\budgetmanager.h
+	<iostream>
+	<ctime>
+	<vector>
+	<algorithm>
+	<bits/stdc++.h>
+	"FileWithExpenses.h"
+	"FileWithIncomes.h"
+	"AdditionalMethods.h"
+	"Income.h"
+	"Expense.h"
+
+1661411631 e:\git_repozytoria\project_homebudget\homebudget.h
+	<iostream>
+	"UserManager.h"
+	"AdditionalMethods.h"
+	"BudgetManager.h"
+
+1660990407 e:\git_repozytoria\project_homebudget\usermanager.h
+	<iostream>
+	<vector>
+	"User.h"
+	"FileWithUser.h"
+	"AdditionalMethods.h"
+
+1661145780 e:\git_repozytoria\project_homebudget\xmlfile.h
+	<iostream>
+	<vector>
+	"Markup.h"
+	"AdditionalMethods.h"
+
+1660889980 e:\git_repozytoria\project_homebudget\filewithuser.h
+	<iostream>
+	<vector>
+	"XmlFile.h"
+	"User.h"
+
+1661152699 e:\git_repozytoria\project_homebudget\filewithincomes.h
+	<iostream>
+	<string>
+	<bits/stdc++.h>
+	<algorithm>
+	"XmlFile.h"
+	"Income.h"
+
+1660289024 e:\git_repozytoria\project_homebudget\filewithexpenses.h
+	<iostream>
+	"XmlFile.h"
+	"Expense.h"
+
+1661146225 source:e:\git_repozytoria\project_homebudget\additionalmethods.cpp
+	"AdditionalMethods.h"
+
+1661414596 e:\git_repozytoria\project_homebudget\additionalmethods.h
+	<iostream>
+	<string>
+
+-1 e:\git_repozytoria\project_homebudget\markup.h
+	<stdlib.h>
+	<string.h>
+	<string>
+	<afx.h>
+
+-1 source:e:\git_repozytoria\project_homebudget\markup.cpp
+	<stdio.h>
+	"Markup.h"
+	<errno.h>
+	<iconv.h>
+	<windows.h>
+	<mbstring.h>
+
