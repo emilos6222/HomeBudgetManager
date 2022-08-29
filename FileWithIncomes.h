@@ -3,14 +3,11 @@
 
 #include <iostream>
 #include <string>
-
 #include <bits/stdc++.h>
 #include <algorithm>
 
 #include "XmlFile.h"
 #include "Income.h"
-
-
 
 using namespace std;
 

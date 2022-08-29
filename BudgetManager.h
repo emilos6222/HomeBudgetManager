@@ -12,30 +12,24 @@
 #include "AdditionalMethods.h"
 #include "Income.h"
 #include "Expense.h"
+#include "Date.h"
 
 using namespace std;
 
 class BudgetManager
 {
-    const int USER_ID;
     FileWithExpenses fileWithExpenses;
     FileWithIncomes fileWithIncomes;
     vector <Income> incomes;
     vector <Expense> expenses;
+    const int USER_ID;
 
-    int getTodayDate();
-    int chooseDateYouWant();
-    bool checkDate(string date);
-    int checkDaysInMonth(int month, int year);
-    int dateStringToInt(string date);
     int getLastIncomeId();
     void saveIncomeInFile(Income incomeToSaveInFile);
     void loadIncomes();
     int getLastExpenseId();
     void saveExpenseInFile(Expense expenseToSaveInFile);
     void loadExpenses();
-    int getCurrentDate();
-    int getDateFromLastMonth();
     void showBalanceOnScreen(double sumOfIncomes, double sumOfExpenses);
     double insertAmount();
     void showIncomesInTable(vector <Income> incomesForPeriod);

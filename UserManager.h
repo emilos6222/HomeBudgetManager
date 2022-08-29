@@ -19,7 +19,6 @@ class UserManager
     void loadUserFromFile();
     void changePasswordInFile(string newPassword);
 
-
 public:
     UserManager(string fileWithUserName):fileWithUser(fileWithUserName)
     {

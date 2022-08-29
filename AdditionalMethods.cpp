@@ -60,3 +60,15 @@ int AdditionalMethods::removeDashesFromStringDateToInt(string date)
 
     return dateAsIntWithoutDashes;
 }
+
+int AdditionalMethods::dateStringToInt(string date)
+{
+    int dateAsInt = 0;
+
+    date = date.erase(4,1);
+    date = date.erase(6,1);
+
+    dateAsInt = stoi(date);
+
+    return dateAsInt;
+}

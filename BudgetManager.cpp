@@ -14,11 +14,11 @@ void BudgetManager::addIncome()
 
     if(yesOrNoAnswer == 'y')
     {
-        tempIncome.setDate(getTodayDate());
+        tempIncome.setDate(Date::getTodayDate());
     }
     else
     {
-        tempIncome.setDate(chooseDateYouWant());
+        tempIncome.setDate(Date::chooseDateYouWant());
         getchar();//to not take /n
     }
 
@@ -36,131 +36,6 @@ void BudgetManager::addIncome()
 
     incomes.push_back(tempIncome);
     saveIncomeInFile(tempIncome);
-}
-
-int BudgetManager::getTodayDate()
-{
-    int fullDate = 0;
-    time_t now = time(0);
-
-    tm *lTm = localtime(&now);
-
-    fullDate = fullDate + (1900 + lTm->tm_year)*10000;
-    fullDate = fullDate + (1+lTm->tm_mon)*100;
-    fullDate = fullDate + (lTm->tm_mday);
-
-    return fullDate;
-}
-
-int BudgetManager::chooseDateYouWant()
-{
-    string date = "";
-
-    system("cls");
-    cout << "Insert date in this format 'YYYY-MM-DD'."<<endl;
-    cout << "Your date: ";
-    cin >> date;
-
-    while(!checkDate(date))
-    {
-        system("cls");
-        cout << "Insert date in this format 'YYYY-MM-DD'."<<endl;
-        cout << "Your date: ";
-        cin >> date;
-    }
-
-    return dateStringToInt(date);
-}
-
-bool BudgetManager::checkDate(string date)
-{
-    int year = 0, month = 0, day = 0;
-    int daysInMonth = 0;
-    int currentDate = 0, currentMonth = 0, currentYear = 0;
-
-    currentDate = getTodayDate();
-    currentMonth = (currentDate/100)%100;
-    currentYear = currentDate/10000;
-
-
-    if(date[4] != '-' || date[7] != '-' || date.size() != 10)
-    {
-        cout << "You insert wrong format of date. Try again."<<endl;
-        system("pause");
-        return false;
-    }
-    else
-    {
-        date = date.erase(4,1);
-        date = date.erase(6,1);
-    }
-
-    for(unsigned int i= 0; i < date.size(); i++)
-    {
-        if(date[i] < '0' || date[i] > '9')
-        {
-            cout << "Make sure you have put figures. Try again."<<endl;
-            system("pause");
-            return false;
-        }
-
-    }
-
-    year = stoi(date.substr(0,4));
-    month = stoi(date.substr(4,2));
-    day = stoi(date.substr(6,2));
-    daysInMonth = checkDaysInMonth(month, year);
-
-    if(year<2000 || year>currentYear || month<1 || month>12 || day<1 || day>daysInMonth || (year==currentYear && month>currentMonth))
-    {
-        cout << "You have put figures that are outside the date range. Date must be set in range from 2000-01-01 to last day current month."<<endl<<endl;
-        system("pause");
-        return false;
-    }
-
-    return true;
-
-}
-
-int BudgetManager::checkDaysInMonth(int month, int year)
-{
-    int daysInMonth = 0;
-
-    if(month == 2)
-    {
-        if(year%4 == 0)
-        {
-            if(year%100 != 0 )
-                daysInMonth = 29;
-            else if(year%400 == 0)
-                daysInMonth = 29;
-            else
-                daysInMonth = 28;
-        }
-        else
-            daysInMonth = 28;
-
-        return daysInMonth;
-    }
-
-    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-        daysInMonth = 31;
-    else
-        daysInMonth = 30;
-
-    return daysInMonth;
-}
-
-int BudgetManager::dateStringToInt(string date)
-{
-    int dateAsInt = 0;
-
-    date = date.erase(4,1);
-    date = date.erase(6,1);
-
-    dateAsInt = stoi(date);
-
-    return dateAsInt;
 }
 
 int BudgetManager::getLastIncomeId()
@@ -195,11 +70,11 @@ void BudgetManager::addExpense()
 
     if(yesOrNoAnswer == 'y')
     {
-        tempExpense.setDate(getTodayDate());
+        tempExpense.setDate(Date::getTodayDate());
     }
     else
     {
-        tempExpense.setDate(chooseDateYouWant());
+        tempExpense.setDate(Date::chooseDateYouWant());
         getchar();//to not take /n
     }
 
@@ -245,7 +120,7 @@ void BudgetManager::showBalanceForCurrentMonth()
     vector <Income> incomesFromCurrentMonth;
     vector <Expense> expensesFromCurrentMonth;
 
-    currentDate = getCurrentDate();
+    currentDate = Date::getCurrentDate();
 
     for(unsigned int i = 0; i < incomes.size(); i++)
     {
@@ -271,23 +146,18 @@ void BudgetManager::showBalanceForCurrentMonth()
 
     system("cls");
     cout << "--------- Balance for current month ---------"<<endl<<endl;
-    showIncomesInTable(incomesFromCurrentMonth);
-    showExpensesInTable(expensesFromCurrentMonth);
+
+    if(!incomesFromCurrentMonth.empty())
+        showIncomesInTable(incomesFromCurrentMonth);
+    else
+        cout<< "You have no incomes during period."<<endl<<endl;
+
+    if(!expensesFromCurrentMonth.empty())
+        showExpensesInTable(expensesFromCurrentMonth);
+    else
+        cout<< "You have no expenses during period."<<endl<<endl;
+
     showBalanceOnScreen(sumOfIncomes, sumOfExpenses );
-}
-
-int BudgetManager::getCurrentDate()
-{
-    int fullDate = 0;
-    time_t now = time(0);
-
-    tm *lTm = localtime(&now);
-
-    fullDate = fullDate + (1900 + lTm->tm_year)*10000;
-    fullDate = fullDate + (1+lTm->tm_mon)*100;
-    fullDate = fullDate + (lTm->tm_mday);
-
-    return fullDate;
 }
 
 void BudgetManager::showBalanceForLastMonth()
@@ -298,7 +168,7 @@ void BudgetManager::showBalanceForLastMonth()
     vector <Income> incomesForLastMonth;
     vector <Expense> expensesForLastMonth;
 
-    dateFromLastMonth = getDateFromLastMonth();
+    dateFromLastMonth = Date::getDateFromLastMonth();
 
     for(unsigned int i = 0; i < incomes.size(); i++)
     {
@@ -324,33 +194,17 @@ void BudgetManager::showBalanceForLastMonth()
     system("cls");
     cout << "--------- Balance for last month ---------"<<endl<<endl;
 
-    showIncomesInTable(incomesForLastMonth);
-    showExpensesInTable(expensesForLastMonth);
-    showBalanceOnScreen(sumOfIncomes, sumOfExpenses );
-}
-
-int BudgetManager::getDateFromLastMonth()
-{
-    int fullDate = 0;
-    time_t now = time(0);
-
-    tm *lTm = localtime(&now);
-
-    if((1+lTm->tm_mon) == 1)
-    {
-        fullDate = fullDate + (1900 + lTm->tm_year - 1)*10000;
-        fullDate = fullDate + 12*100;
-        fullDate = fullDate + (lTm->tm_mday);
-    }
+    if(!incomesForLastMonth.empty())
+        showIncomesInTable(incomesForLastMonth);
     else
-    {
-        fullDate = fullDate + (1900 + lTm->tm_year)*10000;
-        fullDate = fullDate + (1+lTm->tm_mon - 1)*100;
-        fullDate = fullDate + (lTm->tm_mday);
-    }
+        cout<< "You have no incomes during period."<<endl<<endl;
 
-    return fullDate;
+    if(!expensesForLastMonth.empty())
+        showExpensesInTable(expensesForLastMonth);
+    else
+        cout<< "You have no expenses during period."<<endl<<endl;
 
+    showBalanceOnScreen(sumOfIncomes, sumOfExpenses );
 }
 
 void BudgetManager::showBalanceForDefiniedPeriod()
@@ -365,11 +219,11 @@ void BudgetManager::showBalanceForDefiniedPeriod()
     system("cls");
     cout << "Insert date from when you want check balance."<<endl;
     system("pause");
-    firstDate = chooseDateYouWant();
+    firstDate = Date::chooseDateYouWant();
 
     cout << "Insert date to when you want check balance."<<endl;
     system("pause");
-    lastDate = chooseDateYouWant();
+    lastDate = Date::chooseDateYouWant();
 
     if(firstDate > lastDate)
     {
@@ -403,8 +257,17 @@ void BudgetManager::showBalanceForDefiniedPeriod()
     system("cls");
     cout << "--------- Balance for period "<< firstDate/10000 << "-" << setfill('0') << setw(2)<< (firstDate/100)%100 << "-" << setw(2)<< firstDate%100;
     cout << " to "<< lastDate/10000 << "-" << setfill('0') << setw(2) << (lastDate/100)%100 << "-" << setw(2) <<  lastDate%100 << " ---------"<<endl<<endl;
-    showIncomesInTable(incomesForPeriod);
-    showExpensesInTable(expensesForPeriod);
+
+    if(!incomesForPeriod.empty())
+        showIncomesInTable(incomesForPeriod);
+    else
+        cout<< "You have no incomes during period."<<endl<<endl;
+
+    if(!expensesForPeriod.empty())
+        showExpensesInTable(expensesForPeriod);
+    else
+        cout<< "You have no expenses during period."<<endl<<endl;
+
     showBalanceOnScreen(sumOfIncomes, sumOfExpenses );
 }
 
@@ -480,12 +343,12 @@ void BudgetManager::showIncomesInTable(vector <Income> incomesForPeriod)
         showBorderInTable(longestItemWord, longestAmountWord);
 
         cout << "   | "<<incomesForPeriod[i].getItem();
-        for(int j =0; j < longestItemWord - incomesForPeriod[i].getItem().size(); j++)
+        for(unsigned int j =0; j < longestItemWord - incomesForPeriod[i].getItem().size(); j++)
             cout <<" ";
         cout <<" | ";
 
         cout << setprecision (2) << fixed << incomesForPeriod[i].getAmount();
-        for(int j =0; j < longestAmountWord - to_string(incomesForPeriod[i].getAmount()).size(); j++)
+        for(unsigned int j =0; j < longestAmountWord - to_string(incomesForPeriod[i].getAmount()).size(); j++)
             cout <<" ";
         cout <<" | ";
 
@@ -499,19 +362,19 @@ void BudgetManager::showIncomesInTable(vector <Income> incomesForPeriod)
 void BudgetManager::showBorderInTable(int longestItemWord, int longestAmountWord)
 {
     cout << "   +-";
-        for( int j = 0; j < longestItemWord; j++)
-            cout<<"-";
+    for( int j = 0; j < longestItemWord; j++)
         cout<<"-";
+    cout<<"-";
 
-        cout << "+-";
-        for( int j = 0; j < longestAmountWord-4; j++)
-            cout<<"-";
+    cout << "+-";
+    for( int j = 0; j < longestAmountWord-4; j++)
         cout<<"-";
+    cout<<"-";
 
-        cout << "+-";
-        for( int j = 0; j < 10; j++)
-            cout<<"-";
-        cout<<"-+"<<endl;
+    cout << "+-";
+    for( int j = 0; j < 10; j++)
+        cout<<"-";
+    cout<<"-+"<<endl;
 }
 
 void BudgetManager::showExpensesInTable(vector <Expense> expensesForPeriod)
@@ -538,12 +401,12 @@ void BudgetManager::showExpensesInTable(vector <Expense> expensesForPeriod)
         showBorderInTable(longestItemWord, longestAmountWord);
 
         cout << "   | "<<expensesForPeriod[i].getItem();
-        for(int j =0; j < longestItemWord - expensesForPeriod[i].getItem().size(); j++)
+        for(unsigned int j =0; j < longestItemWord - expensesForPeriod[i].getItem().size(); j++)
             cout <<" ";
         cout <<" | ";
 
         cout << setprecision (2) << fixed <<expensesForPeriod[i].getAmount();
-        for(int j =0; j < longestAmountWord - to_string(expensesForPeriod[i].getAmount()).size(); j++)
+        for(unsigned int j =0; j < longestAmountWord - to_string(expensesForPeriod[i].getAmount()).size(); j++)
             cout <<" ";
         cout <<" | ";
 
