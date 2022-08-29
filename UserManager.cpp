@@ -92,6 +92,7 @@ int UserManager::logIn()
     system("cls");
     cout << "The user with that login does not exist."<<endl<<endl;
     system("pause");
+    getchar(); //it prevent from showing that "there is too many letters"
 
     return 0;
 }

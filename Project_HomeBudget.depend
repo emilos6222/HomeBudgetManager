@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1661495423 source:e:\git_repozytoria\project_homebudget\budgetmanager.cpp
+1661590182 source:e:\git_repozytoria\project_homebudget\budgetmanager.cpp
 	"BudgetManager.h"
 
 1659942067 source:e:\git_repozytoria\project_homebudget\expense.cpp
@@ -24,7 +24,7 @@
 	<iostream>
 	"HomeBudget.h"
 
-1660990387 source:e:\git_repozytoria\project_homebudget\usermanager.cpp
+1661590466 source:e:\git_repozytoria\project_homebudget\usermanager.cpp
 	"UserManager.h"
 
 1661144981 source:e:\git_repozytoria\project_homebudget\xmlfile.cpp
@@ -45,7 +45,7 @@
 	<iostream>
 	<string>
 
-1661495536 e:\git_repozytoria\project_homebudget\budgetmanager.h
+1661589291 e:\git_repozytoria\project_homebudget\budgetmanager.h
 	<iostream>
 	<ctime>
 	<vector>
@@ -56,6 +56,7 @@
 	"AdditionalMethods.h"
 	"Income.h"
 	"Expense.h"
+	"Date.h"
 
 1661411631 e:\git_repozytoria\project_homebudget\homebudget.h
 	<iostream>
@@ -63,7 +64,7 @@
 	"AdditionalMethods.h"
 	"BudgetManager.h"
 
-1660990407 e:\git_repozytoria\project_homebudget\usermanager.h
+1661590889 e:\git_repozytoria\project_homebudget\usermanager.h
 	<iostream>
 	<vector>
 	"User.h"
@@ -82,7 +83,7 @@
 	"XmlFile.h"
 	"User.h"
 
-1661152699 e:\git_repozytoria\project_homebudget\filewithincomes.h
+1661590924 e:\git_repozytoria\project_homebudget\filewithincomes.h
 	<iostream>
 	<string>
 	<bits/stdc++.h>
@@ -95,10 +96,10 @@
 	"XmlFile.h"
 	"Expense.h"
 
-1661146225 source:e:\git_repozytoria\project_homebudget\additionalmethods.cpp
+1661589187 source:e:\git_repozytoria\project_homebudget\additionalmethods.cpp
 	"AdditionalMethods.h"
 
-1661414596 e:\git_repozytoria\project_homebudget\additionalmethods.h
+1661589162 e:\git_repozytoria\project_homebudget\additionalmethods.h
 	<iostream>
 	<string>
 
@@ -115,4 +116,13 @@
 	<iconv.h>
 	<windows.h>
 	<mbstring.h>
+
+1661589248 source:e:\git_repozytoria\project_homebudget\date.cpp
+	"Date.h"
+
+1661589238 e:\git_repozytoria\project_homebudget\date.h
+	<iostream>
+	<string>
+	<ctime>
+	"AdditionalMethods.h"
 

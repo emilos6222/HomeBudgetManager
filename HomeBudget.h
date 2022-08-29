@@ -37,6 +37,7 @@ public:
         budgetManager = NULL;
         chooseFromUserMenu();
     }
+
     ~HomeBudget()
     {
         delete budgetManager;

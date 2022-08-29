@@ -14,6 +14,7 @@ public:
     static string toUpperFirstLetter(string wordToUpper);
     static string addDashesInDate(int date);
     static int removeDashesFromStringDateToInt(string date);
+    static int dateStringToInt(string date);
 
 };
 
