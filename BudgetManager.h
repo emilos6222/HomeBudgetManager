@@ -13,6 +13,7 @@
 #include "Income.h"
 #include "Expense.h"
 #include "Date.h"
+#include "Fund.h"
 
 using namespace std;
 
@@ -32,9 +33,8 @@ class BudgetManager
     void loadExpenses();
     void showBalanceOnScreen(double sumOfIncomes, double sumOfExpenses);
     double insertAmount();
-    void showIncomesInTable(vector <Income> incomesForPeriod);
-    void showExpensesInTable(vector <Expense> expensesForPeriod);
     void showBorderInTable(int longestItemWord, int longestAmountWord);
+    void showFundsInTable(vector <Fund*> fundsForPeriod);
 
 public:
     BudgetManager(string fileWithExpensesName, string fileWithIncomesName, int userId)

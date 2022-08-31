@@ -46,6 +46,8 @@
 		<Unit filename="FileWithIncomes.h" />
 		<Unit filename="FileWithUser.cpp" />
 		<Unit filename="FileWithUser.h" />
+		<Unit filename="Fund.cpp" />
+		<Unit filename="Fund.h" />
 		<Unit filename="HomeBudget.cpp" />
 		<Unit filename="HomeBudget.h" />
 		<Unit filename="Income.cpp" />

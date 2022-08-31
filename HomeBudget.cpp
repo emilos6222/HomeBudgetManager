@@ -88,6 +88,7 @@ void HomeBudget::chooseFromBudgetMainMenu()
             break;
         case '5':
             showBalanceForDefiniedPeriod();
+            getchar(); //getting char otherwise is shows "you put wrong char"
             break;
         case '6':
             changePassword();
