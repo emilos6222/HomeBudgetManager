@@ -117,8 +117,10 @@ void BudgetManager::showBalanceForCurrentMonth()
     int currentDate = 0;
     double sumOfIncomes = 0;
     double sumOfExpenses =0;
-    vector <Income> incomesFromCurrentMonth;
-    vector <Expense> expensesFromCurrentMonth;
+    vector <Fund *> pointersToFunds;
+
+    system("cls");
+    cout << "--------- Balance for current month ---------"<<endl<<endl;
 
     currentDate = Date::getCurrentDate();
 
@@ -126,34 +128,31 @@ void BudgetManager::showBalanceForCurrentMonth()
     {
         if((incomes[i].getDate()/100) == (currentDate/100)) //int, wiec po podzieleniu tracimy reszte z dzielenia
         {
-            incomesFromCurrentMonth.push_back(incomes[i]);
+            pointersToFunds.push_back(&incomes[i]);
             sumOfIncomes += incomes[i].getAmount();
         }
     }
+    sort(pointersToFunds.begin(), pointersToFunds.end(), [](Fund* a, Fund* b) {return a->getDate() < b->getDate();});
+    cout<< "                INCOMES"<<endl<<endl;
+    if(!pointersToFunds.empty())
+        showFundsInTable(pointersToFunds);
+    else
+        cout<< "You have no incomes during period."<<endl<<endl;
 
+
+    pointersToFunds.clear();
     for(unsigned int i = 0; i < expenses.size(); i++)
     {
         if((expenses[i].getDate()/100) == (currentDate/100)) //int, wiec po podzieleniu tracimy reszte z dzielenia
         {
-            expensesFromCurrentMonth.push_back(expenses[i]);
+            pointersToFunds.push_back(&expenses[i]);
             sumOfExpenses += expenses[i].getAmount();
         }
     }
-
-    sort(incomesFromCurrentMonth.begin(), incomesFromCurrentMonth.end(), [](Income& a, Income& b) {return a.getDate() < b.getDate();});
-    sort(expensesFromCurrentMonth.begin(), expensesFromCurrentMonth.end(), [](Expense& a, Expense& b) {return a.getDate() < b.getDate();});
-
-
-    system("cls");
-    cout << "--------- Balance for current month ---------"<<endl<<endl;
-
-    if(!incomesFromCurrentMonth.empty())
-        showIncomesInTable(incomesFromCurrentMonth);
-    else
-        cout<< "You have no incomes during period."<<endl<<endl;
-
-    if(!expensesFromCurrentMonth.empty())
-        showExpensesInTable(expensesFromCurrentMonth);
+    sort(pointersToFunds.begin(), pointersToFunds.end(), [](Fund* a, Fund* b) {return a->getDate() < b->getDate();});
+    cout<< "                EXPENSES"<<endl<<endl;
+    if(!pointersToFunds.empty())
+        showFundsInTable(pointersToFunds);
     else
         cout<< "You have no expenses during period."<<endl<<endl;
 
@@ -165,42 +164,41 @@ void BudgetManager::showBalanceForLastMonth()
     int dateFromLastMonth = 0;
     double sumOfIncomes = 0;
     double sumOfExpenses = 0;
-    vector <Income> incomesForLastMonth;
-    vector <Expense> expensesForLastMonth;
-
-    dateFromLastMonth = Date::getDateFromLastMonth();
-
-    for(unsigned int i = 0; i < incomes.size(); i++)
-    {
-        if((incomes[i].getDate()/100) == (dateFromLastMonth/100)) //int, wiec po podzieleniu tracimy reszte z dzielenia
-        {
-            incomesForLastMonth.push_back(incomes[i]);
-            sumOfIncomes += incomes[i].getAmount();
-        }
-    }
-
-    for(unsigned int i = 0; i < expenses.size(); i++)
-    {
-        if((expenses[i].getDate()/100) == (dateFromLastMonth/100)) //int, wiec po podzieleniu tracimy reszte z dzielenia
-        {
-            expensesForLastMonth.push_back(expenses[i]);
-            sumOfExpenses += expenses[i].getAmount();
-        }
-    }
-
-    sort(incomesForLastMonth.begin(), incomesForLastMonth.end(), [](Income& a, Income& b) {return a.getDate() < b.getDate();});
-    sort(expensesForLastMonth.begin(), expensesForLastMonth.end(), [](Expense& a, Expense& b) {return a.getDate() < b.getDate();});
+    vector <Fund *> pointersToFunds;
 
     system("cls");
     cout << "--------- Balance for last month ---------"<<endl<<endl;
 
-    if(!incomesForLastMonth.empty())
-        showIncomesInTable(incomesForLastMonth);
+    dateFromLastMonth = Date::getDateFromLastMonth();
+    for(unsigned int i = 0; i < incomes.size(); i++)
+    {
+        if((incomes[i].getDate()/100) == (dateFromLastMonth/100)) //int, wiec po podzieleniu tracimy reszte z dzielenia
+        {
+            pointersToFunds.push_back(&incomes[i]);
+            sumOfIncomes += incomes[i].getAmount();
+        }
+    }
+    sort(pointersToFunds.begin(), pointersToFunds.end(), [](Fund* a, Fund* b) {return a->getDate() < b->getDate();});
+    cout<< "                INCOMES"<<endl<<endl;
+    if(!pointersToFunds.empty())
+        showFundsInTable(pointersToFunds);
     else
         cout<< "You have no incomes during period."<<endl<<endl;
 
-    if(!expensesForLastMonth.empty())
-        showExpensesInTable(expensesForLastMonth);
+
+    pointersToFunds.clear();
+    for(unsigned int i = 0; i < expenses.size(); i++)
+    {
+        if((expenses[i].getDate()/100) == (dateFromLastMonth/100)) //int, wiec po podzieleniu tracimy reszte z dzielenia
+        {
+            pointersToFunds.push_back(&expenses[i]);
+            sumOfExpenses += expenses[i].getAmount();
+        }
+    }
+    sort(pointersToFunds.begin(), pointersToFunds.end(), [](Fund* a, Fund* b) {return a->getDate() < b->getDate();});
+    cout<< "                EXPENSES"<<endl<<endl;
+    if(!pointersToFunds.empty())
+        showFundsInTable(pointersToFunds);
     else
         cout<< "You have no expenses during period."<<endl<<endl;
 
@@ -213,8 +211,7 @@ void BudgetManager::showBalanceForDefiniedPeriod()
     int lastDate = 0;
     double sumOfIncomes = 0;
     double sumOfExpenses = 0;
-    vector <Income> incomesForPeriod;
-    vector <Expense> expensesForPeriod;
+    vector <Fund *> pointersToFunds;
 
     system("cls");
     cout << "Insert date from when you want check balance."<<endl;
@@ -233,38 +230,38 @@ void BudgetManager::showBalanceForDefiniedPeriod()
         return;
     }
 
-    for(unsigned int i = 0; i < incomes.size(); i++)
-    {
-        if(incomes[i].getDate() >= firstDate && incomes[i].getDate() <= lastDate) //int, wiec po podzieleniu tracimy reszte z dzielenia
-        {
-            incomesForPeriod.push_back(incomes[i]);
-            sumOfIncomes += incomes[i].getAmount();
-        }
-    }
-
-    for(unsigned int i = 0; i < expenses.size(); i++)
-    {
-        if(expenses[i].getDate() >= firstDate && expenses[i].getDate() <= lastDate) //int, wiec po podzieleniu tracimy reszte z dzielenia
-        {
-            expensesForPeriod.push_back(expenses[i]);
-            sumOfExpenses += expenses[i].getAmount();
-        }
-    }
-
-    sort(incomesForPeriod.begin(), incomesForPeriod.end(), [](Income& a, Income& b) {return a.getDate() < b.getDate();});
-    sort(expensesForPeriod.begin(), expensesForPeriod.end(), [](Expense& a, Expense& b) {return a.getDate() < b.getDate();});
-
     system("cls");
     cout << "--------- Balance for period "<< firstDate/10000 << "-" << setfill('0') << setw(2)<< (firstDate/100)%100 << "-" << setw(2)<< firstDate%100;
     cout << " to "<< lastDate/10000 << "-" << setfill('0') << setw(2) << (lastDate/100)%100 << "-" << setw(2) <<  lastDate%100 << " ---------"<<endl<<endl;
 
-    if(!incomesForPeriod.empty())
-        showIncomesInTable(incomesForPeriod);
+    for(unsigned int i = 0; i < incomes.size(); i++)
+    {
+        if(incomes[i].getDate() >= firstDate && incomes[i].getDate() <= lastDate) //int, wiec po podzieleniu tracimy reszte z dzielenia
+        {
+            pointersToFunds.push_back(&incomes[i]);
+            sumOfIncomes += incomes[i].getAmount();
+        }
+    }
+    sort(pointersToFunds.begin(), pointersToFunds.end(), [](Fund* a, Fund* b) {return a->getDate() < b->getDate();});
+    cout<< "                INCOMES"<<endl<<endl;
+    if(!pointersToFunds.empty())
+        showFundsInTable(pointersToFunds);
     else
         cout<< "You have no incomes during period."<<endl<<endl;
 
-    if(!expensesForPeriod.empty())
-        showExpensesInTable(expensesForPeriod);
+    pointersToFunds.clear();
+    for(unsigned int i = 0; i < expenses.size(); i++)
+    {
+        if(expenses[i].getDate() >= firstDate && expenses[i].getDate() <= lastDate) //int, wiec po podzieleniu tracimy reszte z dzielenia
+        {
+            pointersToFunds.push_back(&expenses[i]);
+            sumOfExpenses += expenses[i].getAmount();
+        }
+    }
+    sort(pointersToFunds.begin(), pointersToFunds.end(), [](Fund* a, Fund* b) {return a->getDate() < b->getDate();});
+    cout<< "                EXPENSES"<<endl<<endl;
+    if(!pointersToFunds.empty())
+        showFundsInTable(pointersToFunds);
     else
         cout<< "You have no expenses during period."<<endl<<endl;
 
@@ -318,47 +315,6 @@ double BudgetManager::insertAmount()
     return stod(amount);
 }
 
-void BudgetManager::showIncomesInTable(vector <Income> incomesForPeriod)
-{
-    int longestItemWord = 0;
-    int longestAmountWord = 0;
-    string amountAsString = "";
-
-    for(unsigned int i = 0; i < incomesForPeriod.size(); i++)
-    {
-        if(incomesForPeriod[i].getItem().size() > longestItemWord)
-            longestItemWord = incomesForPeriod[i].getItem().size();
-
-        if(to_string(incomesForPeriod[i].getAmount()).size() > longestAmountWord)
-        {
-            amountAsString = to_string(incomesForPeriod[i].getAmount());
-            longestAmountWord = amountAsString.size();
-        }
-    }
-
-
-    cout<< "                INCOMES"<<endl<<endl;
-    for(unsigned int i = 0; i < incomesForPeriod.size(); i++)
-    {
-        showBorderInTable(longestItemWord, longestAmountWord);
-
-        cout << "   | "<<incomesForPeriod[i].getItem();
-        for(unsigned int j =0; j < longestItemWord - incomesForPeriod[i].getItem().size(); j++)
-            cout <<" ";
-        cout <<" | ";
-
-        cout << setprecision (2) << fixed << incomesForPeriod[i].getAmount();
-        for(unsigned int j =0; j < longestAmountWord - to_string(incomesForPeriod[i].getAmount()).size(); j++)
-            cout <<" ";
-        cout <<" | ";
-
-        cout << AdditionalMethods::addDashesInDate(incomesForPeriod[i].getDate())<<" |"<<endl;
-    }
-
-    showBorderInTable(longestItemWord, longestAmountWord);
-    cout <<endl<<endl;
-}
-
 void BudgetManager::showBorderInTable(int longestItemWord, int longestAmountWord)
 {
     cout << "   +-";
@@ -377,42 +333,42 @@ void BudgetManager::showBorderInTable(int longestItemWord, int longestAmountWord
     cout<<"-+"<<endl;
 }
 
-void BudgetManager::showExpensesInTable(vector <Expense> expensesForPeriod)
+void BudgetManager::showFundsInTable(vector <Fund*> fundsForPeriod)
 {
-    int longestItemWord = 0;
-    int longestAmountWord = 0;
+    unsigned int longestItemWord = 0;
+    unsigned int longestAmountWord = 0;
     string amountAsString = "";
 
-    for(unsigned int i = 0; i < expensesForPeriod.size(); i++)
+    for(unsigned int i = 0; i < fundsForPeriod.size(); i++)
     {
-        if(expensesForPeriod[i].getItem().size() > longestItemWord)
-            longestItemWord = expensesForPeriod[i].getItem().size();
+        if(fundsForPeriod[i]->getItem().size() > longestItemWord)
+            longestItemWord = fundsForPeriod[i]->getItem().size();
 
-        if(to_string(expensesForPeriod[i].getAmount()).size() > longestAmountWord)
+        if(to_string(fundsForPeriod[i]->getAmount()).size() > longestAmountWord)
         {
-            amountAsString = to_string(expensesForPeriod[i].getAmount());
+            amountAsString = to_string(fundsForPeriod[i]->getAmount());
             longestAmountWord = amountAsString.size();
         }
     }
 
-    cout<< "                EXPENSES"<<endl<<endl;
-    for(unsigned int i = 0; i < expensesForPeriod.size(); i++)
+    for(unsigned int i = 0; i < fundsForPeriod.size(); i++)
     {
         showBorderInTable(longestItemWord, longestAmountWord);
 
-        cout << "   | "<<expensesForPeriod[i].getItem();
-        for(unsigned int j =0; j < longestItemWord - expensesForPeriod[i].getItem().size(); j++)
+        cout << "   | "<<fundsForPeriod[i]->getItem();
+        for(unsigned int j =0; j < longestItemWord - fundsForPeriod[i]->getItem().size(); j++)
             cout <<" ";
         cout <<" | ";
 
-        cout << setprecision (2) << fixed <<expensesForPeriod[i].getAmount();
-        for(unsigned int j =0; j < longestAmountWord - to_string(expensesForPeriod[i].getAmount()).size(); j++)
+        cout << setprecision (2) << fixed <<fundsForPeriod[i]->getAmount();
+        for(unsigned int j =0; j < longestAmountWord - to_string(fundsForPeriod[i]->getAmount()).size(); j++)
             cout <<" ";
         cout <<" | ";
 
-        cout << AdditionalMethods::addDashesInDate(expensesForPeriod[i].getDate())<<" |"<<endl;
+        cout << AdditionalMethods::addDashesInDate(fundsForPeriod[i]->getDate())<<" |"<<endl;
     }
 
     showBorderInTable(longestItemWord, longestAmountWord);
     cout <<endl<<endl;
 }
+
